@@ -1,0 +1,14 @@
+apiVersion: skaffold/v2beta14
+kind: Config
+metadata:
+  name: server
+build:
+  artifacts:
+  - image: temp-discord-c1
+    docker:
+      dockerfile: Dockerfile
+deploy:
+  kubectl:
+    manifests:
+    - deployment.yaml
+    

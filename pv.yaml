@@ -1,0 +1,25 @@
+
+# do pv
+
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name:  local-storage
+spec:
+  capacity:
+    storage: 50Mi
+  volumeMode: Filesystem # Mount volume into Pod as a directory.
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /Users/walter/Desktop/mac_m1_db
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - docker-desktop # your node name # kubectl get no
