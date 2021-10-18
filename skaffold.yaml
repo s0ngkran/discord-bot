@@ -10,5 +10,6 @@ build:
 deploy:
   kubectl:
     manifests:
+    - pv.yaml
     - deployment.yaml
     

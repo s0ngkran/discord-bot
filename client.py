@@ -440,13 +440,21 @@ you can type these all to exec a command
 # def t1():
 
 if __name__ == '__main__':
-    print('------')
-    print('os pwd=>',os.popen('pwd').read())
-    print('os ls =>',os.popen('ls ').read())
-    print('os ls ./db/=>',os.popen('ls ./db/').read())
+    # you have to create .env file on the same dir
+    # and define bot_token = 'your token'
+
+    # to get create a discord bot
+    # https://discord.com/developers/applications/
+
+    # to invite a bot to a server
+    # https://discordapi.com/permissions.html
+
     print('start t1')
+    # this is a application token
     token = os.environ.get('bot_token')
-    client = MyClient('1')
+
+    # pass unique str
+    client = MyClient('staria')
     client.post_works.start()
     client.post_sleep.start()
     print('end t1')
