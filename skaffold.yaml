@@ -6,10 +6,18 @@ build:
   artifacts:
   - image: temp-discord-c1
     docker:
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile1
+  - image: temp-discord-c2
+    docker:
+      dockerfile: Dockerfile2
+  - image: temp-discord-c3
+    docker:
+      dockerfile: Dockerfile3
 deploy:
   kubectl:
     manifests:
     - pv.yaml
-    - deployment.yaml
+    - deployment1.yaml
+    - deployment2.yaml
+    - deployment3.yaml
     

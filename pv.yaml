@@ -7,7 +7,7 @@ metadata:
   name:  local-storage
 spec:
   capacity:
-    storage: 50Mi
+    storage: 150Mi
   volumeMode: Filesystem # Mount volume into Pod as a directory.
   accessModes:
   - ReadWriteOnce

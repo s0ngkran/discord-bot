@@ -14,18 +14,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: my-app
-  name: my-app
+    app: my-app1
+  name: my-app1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: my-app
+      app: my-app1
   strategy: {}
   template:
     metadata:
       labels:
-        app: my-app
+        app: my-app1
     spec:
       containers:
       - image: temp-discord-c1
@@ -36,7 +36,7 @@ spec:
         - containerPort: 8000
         volumeMounts:
         - name:  discord-c1-storage
-          mountPath: "/myproject/dbx"
+          mountPath: "/myproject/db"
       volumes:
         - name: discord-c1-storage
           persistentVolumeClaim:

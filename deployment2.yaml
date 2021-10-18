@@ -1,0 +1,88 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: my-app2
+  name: my-app2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app2
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: my-app2
+    spec:
+      containers:
+      - image: temp-discord-c2
+        name: temp-discord-c2
+        imagePullPolicy: IfNotPresent # for local image
+        resources: {}
+        ports:
+        - containerPort: 8000
+        volumeMounts:
+        - name:  discord-c1-storage
+          mountPath: "/myproject/db"
+      # use the first storage
+      volumes:
+        - name: discord-c1-storage
+          persistentVolumeClaim:
+            claimName: pvc-discord-c1
+
+
+# status: {}
+
+# ---
+# for service for backend
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: discord-c1-svc
+# spec:
+#   type: NodePort
+#   ports:
+#   - port: 8000
+#     protocol: TCP
+#     nodePort: 30001
+#   selector:
+#     app: my-app 
+
+# # # do pv
+# ---
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: pv-discord-c1
+#   labels:
+#     type: local
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   capacity:
+#     storage: 100Mi
+#   persistentVolumeReclaimPolicy: Delete
+#   # nfs:
+#   #   server: 172.16.94.5
+#   #   path: "/export/volumes/pod"
+#   hostPath:
+#     path: "/Users/walter/Desktop/mac_m1_db"
+
+
+## do pvc
+# kind: PersistentVolumeClaim
+# apiVersion: v1
+# metadata:
+#   name: pvc-discord-c1
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   storageClassName: local-storage
+#   resources:
+#     requests:
+#       storage: 50Mi
+
+
+#https://github.com/marcel-dempers/docker-development-youtube-series/blob/master/kubernetes/persistentvolume/postgres-with-pv.yaml
